@@ -80,7 +80,7 @@ MongoClient.connect(url)
 
 
 
-    app.listen(post, function () {
+    app.listen(port, function () {
       console.log("포트"+port+"에서 서버 대기 중...");
     });
 
