@@ -9,6 +9,9 @@
 <body>
   <div class="header">
     <header><h2 style="background-color: rgb(250, 252, 254);">You can follow someone who interaction each other.</h2>
+      <form action="/home" method="GET">
+        <button id="gohome">홈 화면으로</button>
+      </form>
       <form action="/searchFollower" method="POST">
         <input type="text" name= "findName" placeholder="이름을 검색하세요">
         <button type="submit" style="background-color: rgb(255, 250, 105); color:black;">검색</button>
@@ -23,9 +26,8 @@
             <div id="name"><h4><%= follow.name %></h4></div>
             
             <h4><%= follow.instaId %></h4>
-            <% if (follow.image) { %>
-              <img src="<%= follow.image %>" width="200" />
-            <% } %>
+            <img src="<%= follow.image && follow.image.trim() !== '' ? follow.image : '/uploads/default.jpg' %>" width="200" />
+
             <form action="/clickFollow" method="GET">
               <input type="hidden" name="targetName" value="<%= follow.name %>">
               <input type="hidden" name="targetInstaId" value="<%= follow.instaId %>">

@@ -4,27 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Edit</title>
+    <link rel="stylesheet" href="/ejs.css">
 </head>
 <body>
-    <form action="/edit" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="<%= post._id %>">
-    
-    <label>제목</label>
-    <input type="text" name="title" value="<%= post.title %>" required>
-    
-    <label>내용</label>
-    <textarea name="content" required><%= post.content %></textarea>
-    
-    <% if (post.image) { %>
-        <p>현재 이미지:</p>
-        <img src="<%= post.image %>" width="200"><br>
-    <% } %>
-
-    <label>이미지 변경 (선택):</label>
-    <input type="file" name="newImage">
-    
-    <button type="submit">수정 완료</button>
+    <form action="/home" method="GET">
+            <button id="gohome">홈 화면으로</button>
     </form>
+    <div class="postEdit-container">
+        <h2 style="text-align: center; background-color: rgb(7, 12, 96); color:aliceblue;">게시물 수정하기</h2>
+        <form action="/edit" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= post._id %>">
+        
+        <div id = "inputs">
+        <label>제목</label>
+        <input type="text" name="title" value="<%= post.title %>" required>
+        
+        <label>내용</label>
+        <textarea name="content" required><%= post.content %></textarea>
+
+        <% if (post.image) { %>
+            <p>현재 이미지:</p>
+            <img src="<%= post.image %>" width="200"><br>
+        <% } %>
+
+        <label>이미지 변경 (선택):</label>
+        </div>
+        <input style="margin-left: 110px; margin-top: 30px;" type="file" name="newImage">
+
+        <div class="btn-wrapper">
+        <button type="submit">수정 완료</button>
+        </div>
+        </form>
+    </div>
 
 
 </body>

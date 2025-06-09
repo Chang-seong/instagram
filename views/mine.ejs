@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="ejs.css">
 </head>
 <body>
+    <form action="/home" method="GET">
+        <button id="gohome">홈 화면으로</button>
+    </form>
     <div class="myinformation">
     <h2 id="myName"><%= myUser.name %>님의 프로필</h2>
     <p id="myInstaID"><%= myUser.instaId %></p>
     <div class="follower_following">
-        <img src="<%= myUser.image %>" width="150">
+        <img src="<%= myUser.image ? myUser.image : '/uploads/default.jpg' %>" width="150" />
         <form action="/followers" method="GET">
             <button id="followers" type="submit" name="followers">팔로워</button>
         </form>

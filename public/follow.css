@@ -1,4 +1,4 @@
-/*follower.ejs에 대한 css부분*/
+/*follower.ejs, following.ejs와 동일하게 작성함*/
 
 body{
     display: block;
@@ -63,5 +63,35 @@ body{
   margin-bottom: 4px;
 }
 
+button{
+  padding:8px;
+  background-color: #3a95ea;
+  color:#ffffff;
+  border-radius:15px;
+  font-size:12pt;
+  font-weight:bold;
+}
 
-/*following.ejs에 대한 css부분*/
+button:hover{
+  background-color: #2f92f0;
+  transition:0.2s ease-in-out;
+  transform:scale(1.1);
+}
+
+#gohome{
+  padding:16px 24px;
+  background-color: #ffffff;
+  color:#000000;
+  border: 2px solid black; /* 두께, 스타일, 색상 */
+  width: 20%;
+  display: flex;
+  justify-content: center; /* display가 flex일 때 사용함 가로 중앙 정렬 */
+  margin: 0 auto;
+  margin-top: 50px;
+  font-size:14pt;
+}
+
+#gohome:hover{
+  transform:scale(1.1);
+  border-radius:30px;
+}

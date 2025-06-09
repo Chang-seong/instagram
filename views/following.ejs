@@ -6,12 +6,16 @@
   <link rel="stylesheet" href="follow.css">
 </head>
 <body>
+  <form action="/home" method="GET">
+    <button id="gohome">홈 화면으로</button>
+  </form>
   <div class="container">
     <h2 style="background-color: rgb(2, 2, 159); color:aliceblue; font-size:18pt;">내가 팔로우하는 사람들</h2>
 
     <% if (data.length === 0) { %>
       <p>아직 팔로잉이 없습니다.</p>
     <% } else { %>
+      <h4>팔로잉: <%= data.length %>명</h4>
       <div class="follower-list">
         <% data.forEach(f => { %>
           <div class="follower-item">
@@ -19,6 +23,11 @@
             <p><strong><%= f.following_name %></strong></p>
             <p><%= f.following_instaId %></p>
             <p style="font-size: 12px; color: #777;"><%= new Date(f.followed_at).toLocaleDateString("ko-KR") %></p>
+            <form action="/cancelFollow" method="POST">
+              <input type="hidden" name="followingInstaId" value="<%= f.following_instaId %>">
+              <input type="hidden" name="myInstaId" value="<%= f.follower_instaId %>">
+              <button type="submit">언팔로우</button>
+            </form>
           </div>
         <% }) %>
       </div>

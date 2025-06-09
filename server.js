@@ -67,7 +67,7 @@ MongoClient.connect(url)
           if (exist.instaId === instaId) return res.send("이미 존재하는 인스타 ID입니다.");
         }
 
-        // 중복 없음 → 저장
+        // 중복 없음> 저장
         mydb.collection("users").insertOne({ name, instaId, id, pw, image }, function (err, result) {
           if (err) return res.send("회원가입 실패");
 
@@ -126,7 +126,7 @@ app.post("/login", function(req, res) {
 
 app.get("/home", function (req, res) {
   const myUser = req.session.user;
-
+  
   if (!myUser || !myUser.instaId) {
     console.log("로그인된 사용자 정보 없음");
     return res.redirect("/login");
@@ -150,10 +150,10 @@ app.get("/home", function (req, res) {
     mydb.collection("post")
     .find({ instaId: { $in: followingIds } })
     .sort({ _id: -1 }) // 최신 게시물 먼저!
-    .toArray()
-
+    .toArray(),
+    mydb.collection("follow").find().toArray()
   ])
-  .then(([stories, users, posts]) => {
+  .then(([stories, users, posts, follows]) => {
 
     // instaId → name 매핑 테이블 만들기
     const followMap = {};
@@ -165,10 +165,11 @@ app.get("/home", function (req, res) {
     // 게시물에 name, image, date 붙이기
     const enrichedPosts = posts.map(post => {
       const user = users.find(u => u.instaId === post.instaId);
+      const followUser = follows.find(f => f.instaId === post.instaId);
       return {
         ...post,
         name: followMap[post.instaId] || "알 수 없음",
-        profileImage: user?.image || "/uploads/default.jpg",
+        profileImage: (user?.image || followUser?.image || "/uploads/default.jpg"),
         dateFormatted: post.date ? new Date(post.date).toLocaleString("ko-KR") : ""
       };
     });
@@ -176,9 +177,10 @@ app.get("/home", function (req, res) {
     // 스토리도 동일하게
     const enrichedStories = stories.map(story => {
       const user = users.find(u => u.instaId === story.instaId);
+      const followUser = follows.find(f => f.instaId === story.instaId);
       return {
         ...story,
-        profileImage: user?.image || "/uploads/default.jpg"
+        profileImage: (user?.image || followUser?.image || "/uploads/default.jpg")
       };
     });
 
@@ -515,5 +517,71 @@ app.post("/edit", upload.single("newImage"), function (req, res) {
   );
 });
 
+// 로그아웃 처리
+app.post("/logout", (req, res)=> {
+  const myUser = req.session.user;
+  const myInstaId = myUser.instaId;
+
+  console.log(myInstaId+" 로그아웃");
+  req.session.destroy(); // 세션 제거
+  res.redirect("/");
+});
 
 
+//나를 팔로우하는 사람을 삭제하는 기능(팔로우를 끊는 것)
+app.post("/deleteFollow", (req, res)=>{
+  const { followerInstaId, myInstaId } = req.body; //내 인스타 아이디와 나를 팔로우하는 사람의 정보를 받음
+
+  if(!followerInstaId || !myInstaId){
+    return res.status(400).send("팔로워 정보가 없습니다.");
+  }
+
+  mydb.collection("matchedFollow").deleteOne({
+    follower_instaId: followerInstaId,
+    following_instaId: myInstaId
+  },function (err,result){
+    if(err){
+      console.error("팔로우 삭제 실패")
+      return res.status(500).send("삭제 중 오류 발생");
+    }
+    console.log(`${followerInstaId} → ${myInstaId} 팔로우 삭제 완료`);
+
+    // 삭제 후 최신 팔로워 목록 다시 불러오기
+    mydb.collection("matchedFollow").find({ following_instaId: myInstaId }).toArray((err, followers) => {
+      if (err) {
+        return res.status(500).send("팔로워 불러오기 오류");
+      }
+
+      res.render("follower.ejs", { data: followers });
+    });
+  });
+});
+
+//내가 팔로우하는 사람을 삭제하는 기능(팔로우를 끊는 것)
+app.post("/cancelFollow", (req, res)=>{
+  const { followingInstaId, myInstaId } = req.body; //내 인스타 아이디와 내가 팔로우하는 사람의 정보를 받음
+
+  if(!followingInstaId || !myInstaId){
+    return res.status(400).send("팔로잉 정보가 없습니다.");
+  }
+
+  mydb.collection("matchedFollow").deleteOne({
+    follower_instaId: myInstaId,
+    following_instaId: followingInstaId
+  },function (err,result){
+    if(err){
+      console.error("팔로우 삭제 실패")
+      return res.status(500).send("삭제 중 오류 발생");
+    }
+    console.log(`${myInstaId} → ${followingInstaId} 팔로우 삭제 완료`);
+
+    // 삭제 후 최신 팔로잉 목록 다시 불러오기
+    mydb.collection("matchedFollow").find({ follower_instaId: myInstaId }).toArray((err, followings) => {
+      if (err) {
+        return res.status(500).send("팔로잉 불러오기 오류");
+      }
+
+      res.render("following.ejs", { data: followings });
+    });
+  });
+});

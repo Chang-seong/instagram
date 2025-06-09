@@ -23,7 +23,7 @@ header{
     display: flex;
     flex-direction: row; /* 가로 배치 */
     flex-wrap: wrap; /* 넘치면 줄바꿈 */
-    justify-content: center; /* 가운데 정렬 (원하는 대로 left, space-between도 가능) */
+    justify-content: center; /* 가운데 정렬 */
     gap: 40px; /* 카드 간 간격 */
 }
 
@@ -108,20 +108,24 @@ button:hover {
   transition: all 0.2s ease;
 }
 
-.postupload, .storyupload{
+.postupload, .storyupload, .postEdit-container{
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     padding: 30px;
     width: 400px;
     margin: 50px auto;
+    font-weight: bold;
+    font-size: 12pt;
+    text-align:center;
 }
 
-.postupload input, .storyupload input{
+.postupload input, .storyupload input, .postEdit-container input{
     width:300px;
     height:50px;
     font-weight:bold;
 }
+
 
 #inputs {
   margin-left: auto;
@@ -340,15 +344,6 @@ button[name="myImage"]:hover {
   background-color: #404040;
 }
 
-.profile-img{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  /*img나 video에서 지정된 width, height 안에 꽉 차도록 비율 유지하며 설정함*/
-  margin-bottom: 10px;
-}
-
 .edit_delete button{
   padding:5px 5px;
   background-color: rgb(200, 1, 1);
@@ -374,3 +369,19 @@ button[name="myImage"]:hover {
   transform:scale(1.1);
 }
 
+#gohome{
+  padding:16px 24px;
+  background-color: #ffffff;
+  color:#000000;
+  border: 2px solid black; /* 두께, 스타일, 색상 */
+  width: 20%;
+  display: flex;
+  justify-content: center; /* display가 flex일 때 사용함 가로 중앙 정렬 */
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+#gohome:hover{
+  transform:scale(1.1);
+  border-radius:30px;
+}

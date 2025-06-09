@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="ejs.css">
 </head>
 <body>
+    <form action="/home" method="GET">
+        <button id="gohome">홈 화면으로</button>
+    </form>
 <div class="storyupload">
-    <h2 style="text-align: center; background-color: rgb(7, 12, 96); color:aliceblue;">스토리 추가하기</h2> 
+    <h2 style="text-align: center; background-color: rgb(7, 12, 96); color:aliceblue;">메모 추가하기</h2> 
     <form action="/story" method="POST" enctype="multipart/form-data">
         <div id = "inputs">
             <textarea maxlength="150" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea><br>
