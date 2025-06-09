@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my information</title>
+    <link rel="stylesheet" href="ejs.css">
+</head>
+<body>
+    <div class="myinformation">
+    <h2 id="myName"><%= myUser.name %>님의 프로필</h2>
+    <p id="myInstaID"><%= myUser.instaId %></p>
+    <div class="follower_following">
+        <img src="<%= myUser.image %>" width="150">
+        <form action="/followers" method="GET">
+            <button id="followers" type="submit" name="followers">팔로워</button>
+        </form>
+
+        <form action="/followings" method="GET">
+            <button id="followings" type="submit" name="followings">팔로잉</button>
+        </form>
+    </div>
+    <form action="/myImage" method="POST" enctype="multipart/form-data">
+        <!-- 숨겨진 파일 선택창 -->
+        <input type="file" name="image" id="imageInput" style="display:none;" onchange="this.form.submit()">
+
+        <!-- 보여지는 버튼 -->
+        <button id="changePic" type="button" onclick="document.getElementById('imageInput').click()">사진 변경</button>
+    </form>
+
+
+    <div class="myStory">
+    <h4>내 스토리</h4>
+    <% story.forEach(s => { %>
+    <div>
+        <h5><%= s.content %></h5>
+        <% if (s.image) { %>
+        <img src="<%= s.image %>" width="100">
+        <% } %>
+
+        <div class="edit_deleteS">
+        <!-- 삭제 버튼 -->
+        <form action="/deleteS" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value="<%= s._id %>">
+            <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
+        </form>
+        </div>
+    </div>
+    <% }) %>
+    </div>
+
+    <div class="myPost">
+    <h4>내 게시물</h4>
+    <% post.forEach(p => { %>
+    <div>
+        <h4><%= p.title %></h4>
+        <h5><%= p.content %></h5>
+        <% if (p.image) { %>
+            <img src="<%= p.image %>" width="100">
+        <% } %>
+
+        <div class="edit_delete">
+        <!-- 수정 버튼 -->
+        <form action="/edit/<%= p._id %>" method="GET" style="display:inline;">
+            <button type="submit">수정</button>
+        </form>
+
+        <!-- 삭제 버튼 -->
+        <form action="/deleteP" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value="<%= p._id %>">
+            <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
+        </form>
+        </div>
+        </div>
+    <% }) %>
+    </div>
+
+    </div>
+
+
+</body>
+</html>

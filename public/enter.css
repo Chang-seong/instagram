@@ -1,0 +1,110 @@
+html {
+  background: linear-gradient(to right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  font-family: 'Helvetica Neue', sans-serif;
+}
+header {
+  width: 60%;
+  height: 180px;
+  margin:30px auto 20px auto;
+  padding:0px 10px 15px 10px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius:10%;
+  text-align: center;
+  line-height: 80px; /*줄 높이 > 텍스트 위 아래 공간을 얼마나 차지하느냐*/
+  align-items: center; /* 수평 중앙 정렬 */
+}
+
+nav {
+  width: 60%;
+  height: auto;
+  margin-top:auto;
+  text-align: center;
+  line-height: 100px;
+  background-color: rgb(193, 198, 202);
+  margin: 0 auto; /* 가로 중앙 정렬 핵심 */
+  border-radius:10px;
+}
+input {
+  width: 150px;
+  padding: 10px;
+  font-size: 11pt;
+}
+
+button {
+  padding: 10px 10px;
+  margin: 15px 10px;
+  border: none;
+  background-color: #3897f0;
+  color: white;
+  font-weight:bold;
+  font-size:14pt;
+  border-radius: 6px;
+  cursor: pointer;/*입력창에 마우스를 올렸을 때 마우스 모양을 손가락 모양으로 변경해줌*/
+  transition: transform 0.4s ease; /* 부드럽게 변화, 0.3초 정도가 자연스러움 */
+}
+
+button:hover {
+  background-color: #1c78d9;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+
+.post1{
+  width:70%;
+  height:auto;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-container {
+  display: flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap: 20px;
+  margin: 0 auto;
+  flex-wrap:wrap;
+  width: 35%;
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+  background-color: rgb(211, 232, 249);
+  border-radius:10px;
+}
+.auth-box {
+  width: 250px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap; /*display flex 요소와 함께 쓰며 한 줄에 다 못 담을 때 다음 줄로 넘긴다는 문장*/
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+img {
+  background-color: transparent;
+  animation: floatY 11s ease-in-out infinite;
+
+}
+
+@keyframes floatY {
+  0%   { transform: translate(-290px, -200px); }
+  15%  { transform: translate(-15px, -200px); }
+  30%  { transform: translate(-15px, -50px); }
+  45%  { transform: translate(290px, -50px); } 
+  60%  { transform: translate(290px, 30px); }
+  80%  { transform: translate(-290px, 30px); }
+  100% { transform: translate(-290px, -200px); }
+}
+

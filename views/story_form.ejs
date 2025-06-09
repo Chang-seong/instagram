@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add story</title>
+    <link rel="stylesheet" href="ejs.css">
+</head>
+<body>
+<div class="storyupload">
+    <h2 style="text-align: center; background-color: rgb(7, 12, 96); color:aliceblue;">스토리 추가하기</h2> 
+    <form action="/story" method="POST" enctype="multipart/form-data">
+        <div id = "inputs">
+            <textarea maxlength="150" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea><br>
+            <input type="text" name="location" placeholder="장소 (입력)">
+            <input type="file" name="image"><br>
+        </div>
+        <div class="btn-wrapper">
+            <button type="submit" name="storyUpload">작성하기</button>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

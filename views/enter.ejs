@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>로그인 / 회원가입</title>
+  <meta charset="UTF-8">
+  <link href="enter.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <p>접속 주소: <a href="https://[나중에주소].onrender.com">[나중에주소].onrender.com</a></p>
+        <h1>You must register before using this application.</h1>
+    </header>
+
+    <nav class="auth-container">
+        <!-- 로그인 구역 -->
+        <section class="auth-box login-box">
+            <h2>로그인</h2>
+            <form action="/login" method="POST">
+            <input type="text" name="id" placeholder="아이디" required>
+            <input type="password" name="pw" placeholder="비밀번호" required>
+            <button type="submit">로그인</button>
+            </form>
+        </section>
+
+        <!-- 회원가입 구역 -->
+        <section class="auth-box register-box">
+            <h2>회원가입</h2>
+            <form action="/register" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="이름" required>
+            <input type="text" name="instaId" placeholder="@insta id" required>
+            <input type="text" name="id" placeholder="아이디" required>
+            <input type="password" name="pw" placeholder="비밀번호" required>
+            <input type="file" name="image" accept=".jpg, .jpeg, .png">
+            <button type="submit">회원가입</button>
+            </form>
+        </section>
+        <img src="/uploads/instalogo.png" width="50px" height="50px">
+    </nav>
+
+</body>
+</html>
