@@ -9,6 +9,7 @@ const ObjectId = require("mongodb").ObjectId;
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const { promises } = require("dns");
+const port = process.env.PORT || 5000;
 
 const url = 'mongodb+srv://plzz:test1234@cluster0.65etpdx.mongodb.net/myboard?retryWrites=true&w=majority';
 
@@ -79,8 +80,8 @@ MongoClient.connect(url)
 
 
 
-    app.listen(5000, function () {
-      console.log("포트 5000으로 서버 대기 중...");
+    app.listen(post, function () {
+      console.log("포트"+port+"에서 서버 대기 중...");
     });
 
   })
