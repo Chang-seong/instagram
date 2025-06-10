@@ -20,7 +20,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI, // 여기를 환경변수로 연결
+    url: 'mongodb+srv://plzz:test1234@cluster0.65etpdx.mongodb.net/myboard?retryWrites=true&w=majority', // 여기를 환경변수로 연결
     dbName: 'myboard',
     ttl: 14 * 24 * 60 * 60
   })
