@@ -79,9 +79,11 @@ MongoClient.connect(url)
     });
 
 
+    console.log("🌐 실제 포트:", process.env.PORT);
+
 
     app.listen(port, function () {
-      console.log("포트"+port+"에서 서버 대기 중...");
+      console.log(`포트 ${port}에서 서버 대기 중...`);
     });
 
   })
