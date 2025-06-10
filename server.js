@@ -37,6 +37,10 @@ app.use(session({
   saveUninitialized: true
 }));*/
 
+//얘네도 위에 있는 애들들
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); //얘는 새로운 코드
 app.set("view engine", "ejs");
 
 // 업로드된 파일을 저장할 경로와 파일 이름 설정
