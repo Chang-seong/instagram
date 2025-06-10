@@ -7,24 +7,36 @@ const path = require("path");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
 const bodyParser = require("body-parser");
-const session = require("express-session");
+//const session = require("express-session");
+const MongoStore = require("connect-mongo"); //add new
 const { promises } = require("dns");
 const port = process.env.PORT || 5000;
 
 const url = 'mongodb+srv://plzz:test1234@cluster0.65etpdx.mongodb.net/myboard?retryWrites=true&w=majority';
 
 
+app.use(session({
+  secret: process.env.SESSION_SECRET || "sodlfmadmsckdtjd153159",
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI, // 여기를 환경변수로 연결
+    dbName: 'myboard',
+    ttl: 14 * 24 * 60 * 60
+  })
+}));
 
 let mydb;
 
-// 미들웨어 설정
+/* 미들웨어 설정
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(session({
   secret: '비밀코드',
   resave: false,
   saveUninitialized: true
-}));
+}));*/
+
 app.set("view engine", "ejs");
 
 // 업로드된 파일을 저장할 경로와 파일 이름 설정
