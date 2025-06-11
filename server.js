@@ -662,7 +662,7 @@ app.post("/edit", upload.single("newImage"), async (req, res) => { // 게시물 
 
   const updateData = { title, content, date: new Date() }; // 업데이트할 데이터 객체 생성
   if (req.file) { // 새 이미지가 업로드된 경우
-    updateData.image = "/Uploads/" + req.file.filename; // 이미지 경로 추가
+    updateData.image = "/uploads/" + req.file.filename; // 이미지 경로 추가
     console.log("새 이미지:", updateData.image); // 새 이미지 경로 로그 출력
   }
 
