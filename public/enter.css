@@ -1,4 +1,5 @@
 html {
+  /*배경색은 인스타그램 색상과 유사하게 설정*/
   background: linear-gradient(to right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -15,23 +16,23 @@ header {
   align-items: center; /* 수평 중앙 정렬 */
 }
 
-nav {
+nav {/*nav 스타일 지정*/
   width: 60%;
   height: auto;
   margin-top:auto;
   text-align: center;
-  line-height: 100px;
+  line-height: 100px; /*줄 높이 설정*/
   background-color: rgb(193, 198, 202);
   margin: 0 auto; /* 가로 중앙 정렬 핵심 */
   border-radius:10px;
 }
-input {
+input {/*입력창 설정*/
   width: 150px;
   padding: 10px;
   font-size: 11pt;
 }
 
-button {
+button {/*버튼 스타일 지정*/
   padding: 10px 10px;
   margin: 15px 10px;
   border: none;
@@ -44,7 +45,7 @@ button {
   transition: transform 0.4s ease; /* 부드럽게 변화, 0.3초 정도가 자연스러움 */
 }
 
-button:hover {
+button:hover {/*마우스 올렸을 때 설정*/
   background-color: #1c78d9;
   transform: scale(1.05);
   transition: all 0.2s ease;
@@ -58,12 +59,13 @@ button:hover {
 }
 
 .auth-container {
+  /*스토리와 게시물 표시되는 부분의 스타일 적용*/
   display: flex;
   justify-content:center;
   align-items:flex-start;
   gap: 20px;
   margin: 0 auto;
-  flex-wrap:wrap;
+  flex-wrap:wrap; /*나열된 요소들의 총 너비가 부모 너비보다 클 때 다음줄에 표시*/
   width: 35%;
   border-radius: 10px;
   padding: 30px 20px;
@@ -78,7 +80,7 @@ button:hover {
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
   padding: 15px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /*행 방향으로 나열*/
   align-items: center;
 }
 
@@ -95,9 +97,10 @@ form {
 img {
   background-color: transparent;
   animation: floatY 11s ease-in-out infinite;
-
+/*이름이 floatY인 항목에 애니메이션 적용용*/
 }
 
+/*로그인창과 회원 가입 창 사이에서 왔다갔다 함*/
 @keyframes floatY {
   0%   { transform: translate(-290px, -200px); }
   15%  { transform: translate(-15px, -200px); }

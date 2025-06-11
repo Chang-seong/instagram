@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts</title>
-    <link rel="stylesheet" href="/ejs.css">
+    <link rel="stylesheet" href="ejs.css">
+    <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
+    <!-- 홈 화면으로 가는 버튼-->
+    <form action="/home" method="GET">
+        <button id="gohome">홈 화면으로</button>
+    </form>
     <div class="post-container">
     <div class="post-header">
+        <!-- 프로필 사진을 동그랗게 설정함-->
         <img src="<%= image %>" alt="프로필 사진">
         <div class="user-info">
+            <!-- 게시자 이름과 인스타 아이디를 표시-->
         <%= name %> (<%= instaId %>)
         </div>
+        <!-- 우리나라 시간 기준으로 변형-->
         <div class="post-date"><%= new Date(date).toLocaleString('ko-KR') %></div>
     </div>
 
+    <!-- 서버에서 넘겨준 게시물 정보 데이터 posts를 post를 사용해 나타냄-->
     <% posts.forEach(post => { %>
         <% if (post.image) { %>
+            <!-- 게시물 이미지 표시-->
         <img class="post-image" src="<%= post.image %>" alt="게시물 이미지">
         <% } %>
         <div class="post-caption">
+            <!-- 게시물 제목과 내용을 표시-->
         <p><strong><%= post.title %></strong></p>
         <p><%= post.content %></p>
         </div>

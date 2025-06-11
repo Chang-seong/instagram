@@ -78,7 +78,7 @@ button:hover{
   transform:scale(1.1);
 }
 
-#gohome{
+#gohome{/*홈 화면으로 가는 버튼 스타일 지정*/
   padding:16px 24px;
   background-color: #ffffff;
   color:#000000;

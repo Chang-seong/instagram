@@ -3,26 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Followings</title>
-  <link rel="stylesheet" href="/follow.css">
+  <link rel="stylesheet" href="follow.css">
+  <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
+  <!-- 홈 화면으로 돌아감-->
   <form action="/home" method="GET">
     <button id="gohome">홈 화면으로</button>
   </form>
   <div class="container">
+    <!-- 제목 설정 및 스타일 적용-->
     <h2 style="background-color: rgb(2, 2, 159); color:aliceblue; font-size:18pt;">내가 팔로우하는 사람들</h2>
 
     <% if (data.length === 0) { %>
+      <!-- 서버에서 보낸 data가 없으면 팔로잉이 없다고 출력-->
       <p>아직 팔로잉이 없습니다.</p>
     <% } else { %>
+      <!-- 서버에서 보낸 data가 있으면 팔로잉의 인원 수를 출력-->
       <h4>팔로잉: <%= data.length %>명</h4>
       <div class="follower-list">
+        <!-- 서버에서 보낸 data를 forEach 방식으로 f에 담아 분배-->
         <% data.forEach(f => { %>
           <div class="follower-item">
+            <!-- 프로필 이미지 출력하거나 없으면 기본 프사 출력-->
             <img src="<%= f.image || '/uploads/default.jpg' %>" alt="프로필 이미지" width="100">
             <p><strong><%= f.following_name %></strong></p>
             <p><%= f.following_instaId %></p>
+            <!-- 이름과 인스타 아이디 출력-->
             <p style="font-size: 12px; color: #777;"><%= new Date(f.followed_at).toLocaleDateString("ko-KR") %></p>
+            <!-- 언팔로우할 때 누르는 버튼-->
             <form action="/cancelFollow" method="POST">
               <input type="hidden" name="followingInstaId" value="<%= f.following_instaId %>">
               <input type="hidden" name="myInstaId" value="<%= f.follower_instaId %>">

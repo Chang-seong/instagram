@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add story</title>
-    <link rel="stylesheet" href="/ejs.css">
+    <link rel="stylesheet" href="ejs.css">
+    <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
+    <!-- 홈 화면으로 가는 버튼-->
     <form action="/home" method="GET">
         <button id="gohome">홈 화면으로</button>
     </form>
 <div class="storyupload">
+    <!-- 제목란, 스타일까지 지정-->
     <h2 style="text-align: center; background-color: rgb(7, 12, 96); color:aliceblue;">메모 추가하기</h2> 
+    <!-- 메모 업로드 폼 버튼-->
     <form action="/story" method="POST" enctype="multipart/form-data">
         <div id = "inputs">
+            
             <textarea maxlength="150" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea><br>
-            <input type="text" name="location" placeholder="장소 (입력)">
-            <input type="file" name="image"><br>
+            <input type="text" name="location" placeholder="장소 (입력)"><!-- 장소 입력-->
+            <input type="file" name="image"><br> <!--사진 업로드 하는 버튼-->
         </div>
         <div class="btn-wrapper">
+            <!-- 메모 작성 완료하면 누를 버튼-->
             <button type="submit" name="storyUpload">작성하기</button>
         </div>
 

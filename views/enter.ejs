@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>로그인 / 회원가입</title>
-  <meta charset="UTF-8">
-  <link href="/enter.css" rel="stylesheet">
+    <title>로그인 / 회원가입</title>
+    <meta charset="UTF-8">
+    <link href="enter.css" rel="stylesheet">
+    <!-- 외부 CSS 파일에 접근-->
 </head>
+
 <body>
     <header>
-        <p>접속 주소: <a href="https://[나중에주소].onrender.com">[나중에주소].onrender.com</a></p>
+        <p>접속 주소: <a href="http://localhost:5000/">http://localhost:5000/</a></p>
         <h1>You must register before using this application.</h1>
     </header>
 
@@ -16,9 +19,10 @@
         <section class="auth-box login-box">
             <h2>로그인</h2>
             <form action="/login" method="POST">
-            <input type="text" name="id" placeholder="아이디" required>
-            <input type="password" name="pw" placeholder="비밀번호" required>
-            <button type="submit">로그인</button>
+                <!-- 로그인 입력창 및 제출 버튼 생성-->
+                <input type="text" name="id" placeholder="아이디" required>
+                <input type="password" name="pw" placeholder="비밀번호" required>
+                <button type="submit">로그인</button>
             </form>
         </section>
 
@@ -26,16 +30,21 @@
         <section class="auth-box register-box">
             <h2>회원가입</h2>
             <form action="/register" method="POST" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="이름" required>
-            <input type="text" name="instaId" placeholder="@insta id" required>
-            <input type="text" name="id" placeholder="아이디" required>
-            <input type="password" name="pw" placeholder="비밀번호" required>
-            <input type="file" name="image" accept=".jpg, .jpeg, .png">
-            <button type="submit">회원가입</button>
+                <!-- 회원가입 입력창 및 제출 버튼 생성-->
+                <input type="text" name="name" placeholder="이름" required>
+                <!-- 인스타 아이디는 @표시도 함께 써야 함-->
+                <input type="text" name="instaId" placeholder="@insta id" required>
+                <input type="text" name="id" placeholder="아이디" required>
+                <input type="password" name="pw" placeholder="비밀번호" required>
+                <input type="file" name="image" accept=".jpg, .jpeg, .png">
+                <!-- 허용되는 이미지 파일 확장자 지정 -->
+                <button type="submit">회원가입</button>
             </form>
         </section>
+        <!-- 인스타 로고 이미지가 애니메이션 코드를 따라 아래에서 움직임-->
         <img src="/uploads/instalogo.png" width="50px" height="50px">
     </nav>
 
 </body>
+
 </html>

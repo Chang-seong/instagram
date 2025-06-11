@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add post</title>
-    <link rel="stylesheet" href="/ejs.css">
+    <link rel="stylesheet" href="ejs.css">
+    <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
+    <!-- 홈 화면으로 돌아감-->
     <form action="/home" method="GET">
         <button id="gohome">홈 화면으로</button>
     </form>
 <div class="postupload">
+    <!-- 제목 설정 및 스타일 지정-->
     <h2 style="text-align: center; background-color: rgb(7, 12, 96); color:aliceblue;">게시물 추가하기</h2> 
     <form action="/post" method="POST" enctype="multipart/form-data">
         <div id = "inputs">
+            <!-- 게시물에 내용 입력하는 부분-->
             <input type="text" name="title" placeholder="제목을 입력하세요" required><br>
             <textarea name="content" rows="10" placeholder="내용을 입력하세요" required></textarea><br>
             <input type="file" name="image"><br>
         </div>
         <div class="btn-wrapper">
             <button type="submit">작성하기</button>
+            <!-- 작성하면 action="/home" 으로 넘어감-->
         </div>
     </form>
 </div>

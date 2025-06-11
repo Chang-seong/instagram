@@ -3,51 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>홈</title>
-  <link href="/home.css" rel="stylesheet">
+  <link href="home.css" rel="stylesheet">
+  <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
 <div class="information">
+  <!-- 안내 인사 및 주위에 사각형으로 회전하는 인스타그램 로고 설정-->
   <h2><%= name %>님, 환영합니다!</h2><img id="logo" src="/uploads/instalogo.png" width="50px" height="50px">
+  <!-- 클릭하면 confirm으로 한번 더 물어봄-->
   <form action="/logout" method="POST">
     <button id="logout">로그아웃</button>
   </form>
 <div class="images">
-  <img src="/insta1.jpg" width="150px" height="150px">
-  <img src="/insta2.jpg" width="150px" height="150px">
-  <img src="/insta3.jpg" width="150px" height="150px">
-  <img src="/insta4.jpg" width="150px" height="150px">
-  <img src="/insta5.jpg" width="150px" height="150px">
-  <img src="/insta6.jpg" width="150px" height="150px">
+  <!-- 풍성함을 더해줄 이미지 여섯 개 추가-->
+  <img src="insta1.jpg" width="150px" height="150px">
+  <img src="insta2.jpg" width="150px" height="150px">
+  <img src="insta3.jpg" width="150px" height="150px">
+  <img src="insta4.jpg" width="150px" height="150px">
+  <img src="insta5.jpg" width="150px" height="150px">
+  <img src="insta6.jpg" width="150px" height="150px">
 </div>
   <h4>
+    <!-- 안내 메시지 출력-->
     <strong>다른 사람의 소식을 보려면 Follow 하세요!!</strong>
   </h4>
 
   <div class="button-group">
+    <!-- 팔로우할 사람을 탐색하려면 누를 버튼-->
   <form action="/follow" method="GET">
     <button type="submit">팔로우할 사람 탐색</button>
   </form>
-
+<!-- 게시물을 올리려면 누를 버튼-->
   <form action="/post" method="GET">
     <button type="submit">게시물 업로드</button>
   </form>
-
+<!-- 메모를 추가하려면 누를 버튼-->
   <form action="/story" method="GET">
     <button type="submit">메모 추가</button>
   </form>
-
+<!-- 내가 올린 게시물, 메모, 팔로잉, 팔로워를 보려면 누를 버튼-->
   <form action="/mine" method="GET">
     <button type="submit">내 정보 보기</button>
   </form>
   </div>
   
+  <!-- 내가 팔로우하는 사람들의 메모가 표시되는 곳-->
   <div class="story-section">
+    <!-- 서버에서 보낸 값이 0보다 크면!-->
     <% if (stories && stories.length > 0) { %>
       <div class="story-wrapper">
+        <!-- 서버에서 보낸 메모 정보 stories를 story로 분배함-->
         <% stories.forEach(story => { %>
           <div class="story-card">
+            <!-- 프로필 이미지와 제목, 장소, 사진을 순서대로 출력함-->
             <img class="profile-img" src="<%= story.profileImage %>" alt="프로필 이미지" width="60">
-            <p>@<%= story.instaId %>: <%= story.content %></p>
+            <p><%= story.instaId %>: <%= story.content %></p>
             <p>in <%= story.location %></p>
             <% if (story.image) { %>
               <img src="<%= story.image %>" width="180">
@@ -63,24 +73,29 @@
 
 
 <hr>
-
+  <!-- 내가 팔로우하는 사람들의 게시물이 표시되는 곳-->
 <% posts.forEach(post => { %>
   <div class="post-container">
     <div class="post-header">
+      <!-- 프로필 사진-->
       <img class="profile-img" src="<%= post.profileImage %>" alt="프로필 사진">
       <div class="user-info">
+        <!-- 이름과 인스타 아이디-->
         <%= post.name %> (<%= post.instaId %>)
       </div>
       <div class="post-date">
+        <!-- 날짜도 오른쪽 상단에 기재-->
         <%= post.dateFormatted %>
       </div>
     </div>
 
     <% if (post.image) { %>
+      <!-- 게시물 사진 출력-->
       <img class="post-image" src="<%= post.image %>" alt="게시물 이미지">
     <% } %>
 
     <div class="post-caption">
+      <!-- 게시물 제목과 내용 출력-->
       <p><strong><%= post.title %></strong></p>
       <p><%= post.content %></p>
     </div>

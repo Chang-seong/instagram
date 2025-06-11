@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my information</title>
-    <link rel="stylesheet" href="/ejs.css">
+    <link rel="stylesheet" href="ejs.css">
+    <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
+    <!-- 홈 화면으로 돌아감-->
     <form action="/home" method="GET">
         <button id="gohome">홈 화면으로</button>
     </form>
     <div class="myinformation">
+        <!-- 이름, 인스타 아이디가 출력-->
     <h2 id="myName"><%= myUser.name %>님의 프로필</h2>
     <p id="myInstaID"><%= myUser.instaId %></p>
     <div class="follower_following">
+        <!-- 만약 회원가입 시 이미지 설정 안 했으면 기본 이미지로 설정됨-->
         <img src="<%= myUser.image ? myUser.image : '/uploads/default.jpg' %>" width="150" />
+        
+        <!-- 나를 팔로우하는 사람을 보는 버튼-->
         <form action="/followers" method="GET">
             <button id="followers" type="submit" name="followers">팔로워</button>
         </form>
 
+        <!-- 내가 팔로우하는 사람을 보는 버튼-->
         <form action="/followings" method="GET">
             <button id="followings" type="submit" name="followings">팔로잉</button>
         </form>
@@ -27,24 +34,27 @@
         <!-- 숨겨진 파일 선택창 -->
         <input type="file" name="image" id="imageInput" style="display:none;" onchange="this.form.submit()">
 
-        <!-- 보여지는 버튼 -->
+        <!-- 보여지는 버튼, 클릭하면 getElementById("위 파일 선택 버튼의 아이디".click("사진 변경"))-->
         <button id="changePic" type="button" onclick="document.getElementById('imageInput').click()">사진 변경</button>
     </form>
 
 
+    <!-- 내가 올린 게시물과 메모를 보여주는 부분-->
     <div class="myStory">
     <h4>내 스토리</h4>
     <% story.forEach(s => { %>
     <div>
+        <!-- 내가 올린 메모들 출력-->
         <h5><%= s.content %></h5>
         <% if (s.image) { %>
         <img src="<%= s.image %>" width="100">
         <% } %>
 
         <div class="edit_deleteS">
-        <!-- 삭제 버튼 -->
+        <!-- 메모 삭제 버튼 -->
         <form action="/deleteS" method="POST" style="display:inline;">
             <input type="hidden" name="id" value="<%= s._id %>">
+            <!-- 클릭하면 confirm으로 한번 더 물어봄-->
             <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
         </form>
         </div>
@@ -56,6 +66,7 @@
     <h4>내 게시물</h4>
     <% post.forEach(p => { %>
     <div>
+        <!-- 내가 올린 게시물들 출력-->
         <h4><%= p.title %></h4>
         <h5><%= p.content %></h5>
         <% if (p.image) { %>
@@ -63,14 +74,15 @@
         <% } %>
 
         <div class="edit_delete">
-        <!-- 수정 버튼 -->
+        <!-- 게시물 수정 버튼 -->
         <form action="/edit/<%= p._id %>" method="GET" style="display:inline;">
             <button type="submit">수정</button>
         </form>
 
-        <!-- 삭제 버튼 -->
+        <!--게시물 삭제 버튼 -->
         <form action="/deleteP" method="POST" style="display:inline;">
             <input type="hidden" name="id" value="<%= p._id %>">
+            <!-- 클릭하면 confirm으로 한번 더 물어봄-->
             <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
         </form>
         </div>

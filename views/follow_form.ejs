@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search someone you want to follow!</title>
-    <link rel="stylesheet" href="/ejs.css">
+    <link rel="stylesheet" href="ejs.css">
+    <!-- 외부 CSS 파일에 접근-->
 </head>
 <body>
   <div class="header">
+    <!-- 헤더 표시, 스타일도 적용-->
     <header><h2 style="background-color: rgb(250, 252, 254);">You can follow someone who interaction each other.</h2>
+      <!-- 홈 화면으로 이동하는 버튼-->
       <form action="/home" method="GET">
         <button id="gohome">홈 화면으로</button>
       </form>
+      <!-- 팔로우할 사람을 검색하는 버튼-->
       <form action="/searchFollower" method="POST">
         <input type="text" name= "findName" placeholder="이름을 검색하세요">
         <button type="submit" style="background-color: rgb(255, 250, 105); color:black;">검색</button>
@@ -19,21 +23,28 @@
     </header>
   </div>
 
+  <!-- 팔로우할 사람 탐색 버튼을 누르면 나오는 셀럽들의 정보를 표시하기 위한 부분-->
     <div class="follower-list">
     <% if (data && data.length > 0) { %>
       <% data.forEach(follow => { %>
         <div class="follower-item">
+          <!-- 셀럽의 이름-->
             <div id="name"><h4><%= follow.name %></h4></div>
-            
+            <!-- 셀럽의 인스타 아이디디-->
             <h4><%= follow.instaId %></h4>
+            <!-- 셀럽의 프로필 이미지 없으면 기본 값이지만 모두 설정해 놓음-->
             <img src="<%= follow.image && follow.image.trim() !== '' ? follow.image : '/uploads/default.jpg' %>" width="200" />
 
+            <!-- 팔로우 클릭시 서버로 전달 되는 부분-->
+             <!-- 여기서 hidden은 보이진 않지만 req.body값으로 받을 수 있음-->
             <form action="/clickFollow" method="GET">
               <input type="hidden" name="targetName" value="<%= follow.name %>">
               <input type="hidden" name="targetInstaId" value="<%= follow.instaId %>">
               <input type="hidden" name="targetImage" value="<%= follow.image %>">
               <button type="submit">팔로우</button>
             </form>
+            <!-- 셀럽의 프로필을 보는 버튼-->
+             <!-- 여기서 hidden은 보이진 않지만 req.body값으로 받을 수 있음-->
             <form action="/viewPosts" method="GET">
               <input type="hidden" name="name" value="<%= follow.name %>">
               <input type="hidden" name="instaId" value="<%= follow.instaId %>">
